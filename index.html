@@ -103,7 +103,6 @@ button{
 
 <audio id="music" preload="auto" loop>
     <source src="./music.mp3" type="audio/mpeg">
-    Your browser does not support audio.
 </audio>
 
 <div id="welcome" class="page">
@@ -164,7 +163,7 @@ button{
 <script>
 
 const music = document.getElementById("music");
-music.volume = 0.7;
+music.volume = 1.7;
 
 const welcome = document.getElementById("welcome");
 const proposal = document.getElementById("proposal");
@@ -176,19 +175,18 @@ const enterBtn = document.getElementById("enterBtn");
 const yesBtn = document.getElementById("yesBtn");
 const noBtn = document.getElementById("noBtn");
 
-enterBtn.onclick = async () => {
+enterBtn.addEventListener("click", function () {
 
-    try {
-        music.volume = 0.7;
-        await music.play();
-    } catch (err) {
-        console.log("Audio error:", err);
-    }
+    music.volume = 1.7;
+
+    music.play().catch(function(error){
+        console.log("Music blocked:", error);
+    });
 
     welcome.classList.add("hidden");
     proposal.classList.remove("hidden");
-};
 
+});
 document.addEventListener("mousemove", (e) => {
 
     const rect = noBtn.getBoundingClientRect();
